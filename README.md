@@ -27,22 +27,24 @@ Using the Rebuild Script
 #### Additional configuration files (if any)
 This a work in progress idea that I will use as modules when the basic configs grow lager
 
-## Nix Rebuilding
+### Using the Rebuild Script
+
 The rebuild script is a convenience tool for applying configuration changes. It automates the process of copying the configuration files to the /etc/nixos/ directory and then executing nixos-rebuild switch.
-#### How to Use
 
-    Make Configuration Changes: Edit the files in the repository as needed (e.g., nixos/configuration.nix, home-manager/home.nix, apps/neovim.nix).
+### How to Use
 
-    Run the Rebuild Script: Execute the rebuild script to apply the changes:
+This setup uses a custom script named `rebuild` to simplify the process of applying configuration changes in NixOS and Home Manager. Here's how to use it:
 
-    ```bash
+1. **Make Configuration Changes**: Edit the Nix files as needed. This could be the system configuration (`nixos/configuration.nix`), user-level settings (`home-manager/home.nix`), or application-specific files (like `apps/neovim.nix`).
 
-    ./rebuild
+2. **Run the Rebuild Script**: After making your changes, use the `rebuild` script to apply them. The script automates the copying of configuration files to their respective directories and triggers a system rebuild. Execute it by running the following command in your terminal:
 
-    ```
-    This script will copy the updated configuration files to the appropriate locations and trigger a system rebuild.
+   ```bash
+   ./rebuild
+   ```
+This script will copy the updated configuration files to the appropriate locations and trigger a system rebuild.
 
-    Verify Changes: After the rebuild process completes, verify that the changes have been applied successfully.
+3. **Verify Changes**: After the rebuild process completes, verify that the changes have been applied successfully. This **must be manually confirmed** as the script exits successfully it **ASSUMES IT WAS APPLIED CORRECTLY**. 
 
 ### Contributing
 
