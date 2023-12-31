@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+## Rebuilds and switches you nixOS configs
+
+sudo rm /etc/nixos/configuration.nix
+sudo rm /etc/nixos/home.nix
+sudo rm /etc/nixos/apps/neovim.nix
+
+sudo cp nixos/configuration.nix /etc/nixos/
+sudo cp home-manager/home.nix /etc/nixos/
+sudo cp apps/neovim.nix /etc/nixos/apps/
+
+sudo nixos-rebuild switch
