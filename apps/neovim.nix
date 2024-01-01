@@ -17,12 +17,6 @@ with lib;
           vim-nix
           neo-tree-nvim # File-browser
           {
-            plugin = vim-commentary;
-            config = ''
-              let g:hmPlugins='HM_PLUGINS_CONFIG'
-            '';
-          }
-          {
             plugin = lualine-nvim;
             type = "lua";
             config = ''
@@ -52,10 +46,27 @@ with lib;
               vim.cmd[[colorscheme dracula]]
             '';
           } # Dracula Theme installed
+          markdown-preview-nvim # Markdown Preview
+          {
+            plugin = telescope-nvim;
+            type = "lua";
+            config = ''
+              local builtin = require('telescope.builtin')
+              vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+              vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+              vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+              vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+              require("telescope").setup{}
+            '';
+          } # telescope the fuzzy finder !!!note!!! : you need ripgrep installed to use.
         ];
         extraConfig = ''
           set number relativenumber
           map <Space> <Leader>
+          set expandtab
+          set tabstop=2
+          set softtabstop=2
+          set shiftwidth=2
         '';
       };
     };
