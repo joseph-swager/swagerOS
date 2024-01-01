@@ -14,7 +14,7 @@ with lib;
         vimAlias = true;
         defaultEditor = true;
         plugins = with pkgs.vimPlugins; [
-          vim-nix
+          vim-nix # adds nix highlighting, auto indentation and file detection
           neo-tree-nvim # File-browser
           {
             plugin = lualine-nvim;
@@ -38,6 +38,16 @@ with lib;
               )
             '';
           }  # Status Line
+          {    
+            plugin = nvim-treesitter.withAllGrammars;
+            type = "lua";
+            config = ''
+              require('nvim-treesitter.configs').setup {
+                highlight = { enable = true},
+                indent = { enable = true }
+              }
+            '';
+          } # Syntax Highlighting
           {
             plugin = dracula-nvim;
             type = "lua";
@@ -47,6 +57,7 @@ with lib;
             '';
           } # Dracula Theme installed
           markdown-preview-nvim # Markdown Preview
+          plenary-nvim # Dep Needed for Telescope---under the hood this allows easier coroutines to avoid callbacks 
           {
             plugin = telescope-nvim;
             type = "lua";
