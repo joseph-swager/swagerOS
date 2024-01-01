@@ -53,6 +53,7 @@ in {
       neofetch
       nixfmt
       nmap
+      ripgrep
       openssl
       xclip
       ################
