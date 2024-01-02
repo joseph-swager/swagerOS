@@ -4,7 +4,8 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in {
   imports = [ (import "${home-manager}/nixos") ]
-    ++ [ (import ./apps/neovim.nix) ];
+  ++ [ (import ./apps/neovim.nix) ]
+  ++ [ (import ./configs/kitty.nix) ];
   
 
   home-manager.users.josephs = {
@@ -48,7 +49,7 @@ in {
       gnupg
       gnumake
       jq
-      kitty
+      #kitty
       lsd
       neofetch
       nixfmt
@@ -109,11 +110,5 @@ in {
         lla="lsd -al";
       };
     };
-    #kitty = {
-      #enable = true;
-      #package = pkgs.kitty;
-      #font.name = "JetBrainsMono Nerd Font";
-      #font.size = 16;
-    #};
   };
 }
