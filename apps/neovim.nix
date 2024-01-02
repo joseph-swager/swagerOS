@@ -77,6 +77,22 @@ with lib;
               require("telescope").setup{}
             '';
           } # telescope the fuzzy finder !!!note!!! : you need ripgrep installed to use.
+          {
+            plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              local lspconfig = require('lspconfig')
+              lspconfig.lua_ls.setup {}
+              lspconfig.rnix.setup {}
+            '';
+          } # lsp setup
+          {
+            plugin = bufferline-nvim;
+            type = "lua";
+            config = ''
+              require("bufferline").setup{}
+            '';
+          } # A snazzy buffer line thats copied the aesthetics of  doom emacs
         ];
         extraConfig = ''
           set number relativenumber
