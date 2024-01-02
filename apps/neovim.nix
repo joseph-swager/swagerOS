@@ -15,7 +15,14 @@ with lib;
         defaultEditor = true;
         plugins = with pkgs.vimPlugins; [
           vim-nix # adds nix highlighting, auto indentation and file detection
-          neo-tree-nvim # File-browser
+          nvim-web-devicons # need for icon in neo-tree
+          {
+            plugin = neo-tree-nvim;
+            type = "lua";
+            config = ''
+              vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', {})
+            '';
+          }# File-browser
           {
             plugin = lualine-nvim;
             type = "lua";

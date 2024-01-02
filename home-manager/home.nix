@@ -98,7 +98,6 @@ in {
       };
     };
   };
-
   programs = {
     bash = {
       enableCompletion = true;
@@ -108,6 +107,7 @@ in {
         ll="lsd -l";
         la="lsd -a";
         lla="lsd -al";
+        gp="git pull";
       };
     };
   };
