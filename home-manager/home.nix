@@ -5,7 +5,8 @@ let
 in {
   imports = [ (import "${home-manager}/nixos") ]
   ++ [ (import ./apps/neovim.nix) ]
-  ++ [ (import ./configs/kitty.nix) ];
+  ++ [ (import ./configs/kitty.nix) ]
+  ++ [ (import ./configs/direnv.nix) ];
   
 
   home-manager.users.josephs = {
@@ -49,7 +50,6 @@ in {
       gnupg
       gnumake
       jq
-      #kitty
       lsd
       neofetch
       nixfmt

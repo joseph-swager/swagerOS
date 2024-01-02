@@ -5,10 +5,12 @@ sudo rm /etc/nixos/configuration.nix
 sudo rm /etc/nixos/home.nix
 sudo rm /etc/nixos/apps/neovim.nix
 sudo rm /etc/nixos/configs/kitty.nix
+sudo rm /etc/nixos/configs/direnv.nix
 
 sudo cp nixos/configuration.nix /etc/nixos/
 sudo cp home-manager/home.nix /etc/nixos/
 sudo cp apps/neovim.nix /etc/nixos/apps/
 sudo cp configs/kitty.nix /etc/nixos/configs/
+sudo cp configs/direnv.nix /etc/nixos/configs/
 
 sudo nixos-rebuild switch
