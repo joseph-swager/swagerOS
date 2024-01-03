@@ -78,6 +78,23 @@ with lib;
             '';
           } # telescope the fuzzy finder !!!note!!! : you need ripgrep installed to use.
           {
+            plugin = telescope-ui-select-nvim;
+            type = "lua";
+            config = ''
+              require("telescope").setup {
+                extensions = {
+                  ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {
+                    -- even more opts
+                    }
+
+                  }
+                }
+              }
+              require("telescope").load_extension("ui-select")
+            '';
+          }
+          {
             plugin = nvim-lspconfig;
             type = "lua";
             config = ''
