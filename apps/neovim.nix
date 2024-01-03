@@ -83,9 +83,82 @@ with lib;
             config = ''
               local lspconfig = require('lspconfig')
               lspconfig.lua_ls.setup {}
-              lspconfig.rnix.setup {}
+              lspconfig.nixd.setup {}
+              lspconfig.clojure_lsp.setup {}
+              lspconfig.java_language_server.setup {}
+              vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+              vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, {})
+              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
+              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+              vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
+              vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
+              vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {})
+              vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, {})
             '';
           } # lsp setup
+          luasnip # enables Snippets
+          cmp_luasnip # luasnip completion source for nvim-cmp
+          cmp-nvim-lsp # nvim-cmp source for neovim's built-in language server client.
+          {
+            plugin = nvim-cmp;
+            type = "lua";
+            config = ''
+              local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+              local lspconfig = require('lspconfig')
+              local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+              for _, lsp in ipairs(servers) do
+                lspconfig[lsp].setup {
+                  -- on_attach = my_custom_on_attach,
+                  capabilities = capabilities,
+                }
+              end
+
+              local luasnip = require 'luasnip'
+
+              local cmp = require 'cmp'
+              cmp.setup {
+                snippet = {
+                  expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                  end,
+                },
+              mapping = cmp.mapping.preset.insert({
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+                ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+                -- C-b (back) C-f (forward) for snippet placeholder navigation.
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<CR>'] = cmp.mapping.confirm {
+                  behavior = cmp.ConfirmBehavior.Replace,
+                  select = true,
+                },
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                  else
+                    fallback()
+                  end
+                end, { 'i', 's' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                  else
+                    fallback()
+                  end
+                end, { 'i', 's' }),
+              }),
+              sources = {
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+              },
+              }
+            '';
+          }
           {
             plugin = bufferline-nvim;
             type = "lua";

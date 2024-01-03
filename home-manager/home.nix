@@ -20,9 +20,17 @@ in {
       # Editors   #
       #############
       emacs29
-      ################
-      # Lang Servers #
-      ################
+      #############################
+      # Languages & their Servers #
+      #############################
+      clojure
+      clojure-lsp
+      go
+      jdk17
+      java-language-server
+      leiningen
+      lua
+      lua-language-server
       nixd
       #############
       # Gnome     #
