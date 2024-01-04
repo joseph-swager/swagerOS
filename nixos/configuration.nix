@@ -5,12 +5,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Include Home mnager
-      ./home.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # Include Home mnager
+    ./home.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -77,7 +76,7 @@
 
     # Enable the Nvidia Setting menu in gui
     nvidiaSettings = true;
-   
+
     # this selects the driver version you want
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -110,10 +109,7 @@
     isNormalUser = true;
     description = "Joseph Swager";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      thunderbird
-    ];
+    packages = with pkgs; [ firefox thunderbird ];
   };
 
   # Allow unfree packages
@@ -135,7 +131,7 @@
     noto-fonts-color-emoji
     material-icons
   ];
-  
+
   # Nix to manage its GC of older revisions and keep the nix store optimal
   nix = {
     settings.auto-optimise-store = true;
@@ -147,9 +143,8 @@
   };
 
   # getting only the nerd fonts I use
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
+  fonts.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
 
   # Steam Configuration
   programs.steam = {

@@ -1,13 +1,12 @@
 { config, lib, pkgs, user, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in {
   imports = [ (import "${home-manager}/nixos") ]
-  ++ [ (import ./apps/neovim.nix) ]
-  ++ [ (import ./configs/kitty.nix) ]
-  ++ [ (import ./configs/direnv.nix) ];
-  
+    ++ [ (import ./apps/neovim.nix) ] ++ [ (import ./configs/kitty.nix) ]
+    ++ [ (import ./configs/direnv.nix) ];
 
   home-manager.users.josephs = {
     home.username = "josephs";
@@ -87,15 +86,13 @@ in {
           "hidetopbar@mathieu.bidon.ca"
           "gsconnect@andyholmes.github.io"
         ];
-        favorite-apps = ["firefox.desktop" "kitty.desktop"];
+        favorite-apps = [ "firefox.desktop" "kitty.desktop" ];
         had-bluetooth-devices-setup = true;
         remember-mount-password = false;
         welcome-dialog-last-shown-version = "42.4";
       };
 
-      "org/gnome/shell/extensions/user-theme" = {
-        name = "Nordic-darker";
-      };
+      "org/gnome/shell/extensions/user-theme" = { name = "Nordic-darker"; };
 
       "org/gnome/shell/extensions/pop-shell" = {
         focus-right = "disabled";
@@ -103,23 +100,24 @@ in {
         tile-enter = "disabled";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        name = "kitty super";
-        command = "kitty";
-        binding = "<Ctrl><Alt>t";
-      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+        {
+          name = "kitty super";
+          command = "kitty";
+          binding = "<Ctrl><Alt>t";
+        };
     };
   };
   programs = {
     bash = {
       enableCompletion = true;
       shellAliases = {
-        sv="sudo nvim";
-        ls="lsd";
-        ll="lsd -l";
-        la="lsd -a";
-        lla="lsd -al";
-        gp="git pull";
+        sv = "sudo nvim";
+        ls = "lsd";
+        ll = "lsd -l";
+        la = "lsd -a";
+        lla = "lsd -al";
+        gp = "git pull";
       };
     };
   };

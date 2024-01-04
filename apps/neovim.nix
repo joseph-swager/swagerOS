@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: 
-with lib;
-{
+{ config, lib, pkgs, ... }:
+with lib; {
   home-manager.users.josephs = {
     programs = {
       neovim = {
@@ -22,7 +16,7 @@ with lib;
             config = ''
               vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', {})
             '';
-          }# File-browser
+          } # File-browser
           {
             plugin = lualine-nvim;
             type = "lua";
@@ -44,8 +38,8 @@ with lib;
                 }
               )
             '';
-          }  # Status Line
-          {    
+          } # Status Line
+          {
             plugin = nvim-treesitter.withAllGrammars;
             type = "lua";
             config = ''
@@ -64,7 +58,7 @@ with lib;
             '';
           } # Dracula Theme installed
           markdown-preview-nvim # Markdown Preview
-          plenary-nvim # Dep Needed for Telescope---under the hood this allows easier coroutines to avoid callbacks 
+          plenary-nvim # Dep Needed for Telescope---under the hood this allows easier coroutines to avoid callbacks
           {
             plugin = telescope-nvim;
             type = "lua";
