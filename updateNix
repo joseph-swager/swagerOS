@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## Updates the nix-channel and switches you nixOS configs to it
+
+sudo nix-channel --update ; sudo nixos-rebuild switch

@@ -19,6 +19,7 @@ in {
       # Editors   #
       #############
       emacs29
+      jetbrains.pycharm-professional
       #############################
       # Languages & their Servers #
       #############################
@@ -74,6 +75,7 @@ in {
       signal-desktop
       discord
       _1password-gui
+      nomachine-client
     ];
     dconf.settings = {
       "org/gnome/shell" = {
