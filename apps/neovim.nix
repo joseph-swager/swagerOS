@@ -95,6 +95,7 @@ with lib; {
               local lspconfig = require('lspconfig')
               lspconfig.lua_ls.setup {}
               lspconfig.nixd.setup {}
+              lspconfig.pyright.setup {}
               lspconfig.clojure_lsp.setup {}
               lspconfig.java_language_server.setup {}
               vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})

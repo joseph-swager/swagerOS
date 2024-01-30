@@ -113,6 +113,7 @@ in {
   programs = {
     bash = {
       enableCompletion = true;
+      loginShellInit = "eval \"$(direnv hook bash)\"";
       shellAliases = {
         sv = "sudo nvim";
         ls = "lsd";
