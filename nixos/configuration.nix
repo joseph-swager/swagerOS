@@ -119,10 +119,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Tools
+    go
+    cmake
     btop
     git
     wget
     tree
+    # my custom ollama build
+    llama-cpp
+    (import ./derivations/sc-ollama.nix { inherit pkgs; })
     # Gnome Extensions
     gnomeExtensions.tiling-assistant
     # Fonts
