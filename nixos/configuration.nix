@@ -15,6 +15,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Allow these arch bins to run with emulation on the system
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "armv7l-linux"
+    "riscv64-linux"
+    "x86_64-windows"
+    "wasm64-wasi"
+  ];
+
+  # Enable nvidia-docker wrapper, supporting NVIDIA GPUs inside docker containers.
+  virtualisation.docker.enableNvidia = true;
+
   networking.hostName = "msi-b650-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -108,7 +120,7 @@
   users.users.josephs = {
     isNormalUser = true;
     description = "Joseph Swager";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ firefox thunderbird ];
   };
 
@@ -119,6 +131,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Tools
+    file
     btop
     git
     wget
@@ -133,8 +146,11 @@
   ];
 
   # Nix to manage its GC of older revisions and keep the nix store optimal
+  # as well as use experimental features flakes and nix-command 
   nix = {
     settings.auto-optimise-store = true;
+    # Enable Flakes and the new command-line tool
+    settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "weekly";

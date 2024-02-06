@@ -69,6 +69,7 @@ in {
       ripgrep
       openssl
       xclip
+      cudaPackages.cudatoolkit
       ################
       # Desktop Apps #
       ################
